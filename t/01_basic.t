@@ -1,9 +1,7 @@
-#!/usr/bin/perl
-
 use strict;
 use warnings;
 
-use Test::More 'no_plan';
+use Test::More 0.88;
 
 use Scalar::Util qw(refaddr);
 
@@ -36,6 +34,7 @@ use Scalar::Util qw(refaddr);
         traits => [qw(Copy)],
         isa    => "HashRef",
         is     => "rw",
+        predicate => 'has_flar',
     );
 
     has blorg => (
@@ -75,7 +74,7 @@ is( $bar->same->copy_number, 0, "first copy" );
 
 is( $bar->foo->some_attr, 'def', "default value for other attr" );
 
-my $copy = $bar->clone;
+my $copy = $bar->clone( flar => { blog => [1,2,3] } );
 
 isnt( refaddr($bar), refaddr($copy), "copy" );
 
@@ -88,6 +87,8 @@ is( $copy->foo->some_attr, 'def', "default value for other attr" );
 
 isnt( refaddr($bar->foo), refaddr($copy->foo), "copy" );
 is( refaddr($bar->same), refaddr($copy->same), "copy" );
+
+ok( $copy->has_flar, "flar was inserted" );
 
 is( $copy->clone( foo => { some_attr => "laaa" } )->foo->some_attr, "laaa", "Value carried over to recursive call to clone" );
 
@@ -120,3 +121,5 @@ is( $copy->clone( foo => { some_attr => "laaa" } )->foo->some_attr, "laaa", "Val
     isnt( refaddr($foo), refaddr($foo_copy), "foo copied" );
     is( $foo_copy->copy_number, $foo->copy_number, "but not using ->clone");
 }
+
+done_testing;

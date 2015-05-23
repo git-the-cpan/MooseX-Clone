@@ -1,9 +1,10 @@
-#!/usr/bin/perl
-
 package MooseX::Clone::Meta::Attribute::Trait::NoClone;
-use Moose::Role;
+# ABSTRACT: A trait for attributes that should not be copied while cloning
 
-use namespace::clean -except => [qw(meta)];
+our $VERSION = '0.06';
+
+use Moose::Role;
+use namespace::autoclean;
 
 with qw(MooseX::Clone::Meta::Attribute::Trait::Clone::Base);
 
@@ -32,10 +33,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-MooseX::Clone::Meta::Attribute::Trait::NoClone - A trait for attrs that should
-not be copied while cloning.
+MooseX::Clone::Meta::Attribute::Trait::NoClone - A trait for attributes that should not be copied while cloning
+
+=head1 VERSION
+
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -64,6 +70,15 @@ Otherwise calls C<clear_value> and C<initialize_instance_slot>.
 
 =back
 
+=head1 AUTHOR
+
+יובל קוג'מן (Yuval Kogman) <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2008 by יובל קוג'מן (Yuval Kogman).
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

@@ -1,18 +1,15 @@
-#!/usr/bin/perl
+package MooseX::Clone; # git description: 0.05-13-gd83ae68
+# ABSTRACT: Fine-grained cloning support for Moose objects.
 
-package MooseX::Clone;
+our $VERSION = '0.06';
+
 use Moose::Role;
-
-our $VERSION = "0.05";
-
 use Hash::Util::FieldHash::Compat qw(idhash);
-
 use MooseX::Clone::Meta::Attribute::Trait::Clone;
 use MooseX::Clone::Meta::Attribute::Trait::StorableClone;
 use MooseX::Clone::Meta::Attribute::Trait::NoClone;
 use MooseX::Clone::Meta::Attribute::Trait::Copy;
-
-use namespace::clean -except => 'meta';
+use namespace::autoclean;
 
 sub clone {
     my ( $self, %params ) = @_;
@@ -64,9 +61,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-MooseX::Clone - Fine grained cloning support for L<Moose> objects.
+MooseX::Clone - Fine-grained cloning support for Moose objects.
+
+=head1 VERSION
+
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -123,7 +126,6 @@ value's own C<clone> method will be invoked.
 
 By extending this trait you can create custom cloning for certain attributes.
 
-
 By creating C<clone> methods for your objects (e.g. by composing
 L<MooseX::Compile>) you can make them interact with this trait.
 
@@ -162,18 +164,15 @@ will still do the right thing.
 
 clkao made the food required to write this module
 
-=head1 VERSION CONTROL
-
-L<http://code2.0beta.co.uk/moose/svn/>. Ask on #moose for commit bits.
-
 =head1 AUTHOR
 
-Yuval Kogman E<lt>nothingmuch@woobling.orgE<gt>
+יובל קוג'מן (Yuval Kogman) <nothingmuch@woobling.org>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-    Copyright (c) 2008 Yuval Kogman. All rights reserved
-    This program is free software; you can redistribute
-    it and/or modify it under the same terms as Perl itself.
+This software is copyright (c) 2008 by יובל קוג'מן (Yuval Kogman).
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

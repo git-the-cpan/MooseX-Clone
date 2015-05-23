@@ -1,11 +1,12 @@
-#!/usr/bin/perl
-
 package MooseX::Clone::Meta::Attribute::Trait::Clone;
+# ABSTRACT: The attribute trait for deeply cloning attributes
+
+our $VERSION = '0.06';
+
 use Moose::Role;
-
 use Carp qw(croak);
-
-use namespace::clean -except => 'meta';
+use Data::Visitor 0.24 ();
+use namespace::autoclean;
 
 with qw(MooseX::Clone::Meta::Attribute::Trait::Clone::Base);
 
@@ -114,12 +115,15 @@ __END__
 
 =pod
 
-=encoding utf8
+=encoding UTF-8
 
 =head1 NAME
 
-MooseX::Clone::Meta::Attribute::Trait::Clone - The L<Moose::Meta::Attribute>
-trait for deeply cloning attributes.
+MooseX::Clone::Meta::Attribute::Trait::Clone - The attribute trait for deeply cloning attributes
+
+=head1 VERSION
+
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -209,5 +213,16 @@ Called from C<clone_value_data> if the value is not an object and
 C<clone_only_objects> is false.
 
 =back
+
+=head1 AUTHOR
+
+יובל קוג'מן (Yuval Kogman) <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2008 by יובל קוג'מן (Yuval Kogman).
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
